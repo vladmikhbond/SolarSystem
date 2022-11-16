@@ -2,13 +2,9 @@ class Planet
 {
    x = 0; y = 0; vx = 0; vy = 0; 
 
-   constructor(name, size, dist) {
+   constructor(name, size) {
       this.name = name;
       this.size = size;
-      this.x = dist;
-      this.y = 0;
-      this.vx = 0;
-      this.vy = Math.sqrt(SolSys.GM / dist);
    }
 
    step() {
@@ -34,15 +30,17 @@ class SolSys {
    }
 
    step() {
-      for (const element of this.planets) {
-         element.step();
+      for (const planet of this.planets) {
+         planet.step();
       }
    }
 
-   createPlanet(name, size, dist) {
-      let planet = new Planet(name, size, dist);      
+   addPlanet(planet, dist) {
+      planet.x = dist;
+      planet.y = 0;
+      planet.vx = 0;
+      planet.vy = Math.sqrt(SolSys.GM / dist);     
       this.planets.push(planet);
-      return planet;
    }
 }
 

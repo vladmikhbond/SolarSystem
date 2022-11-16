@@ -5,26 +5,27 @@ class View {
   
    draw() {
       const ctx = canvas1.getContext("2d");
+      const sunSize = 50;
+      
    
-      // черное небо космоса
+      // чорне небо космосу
       ctx.fillRect(0, 0, canvas1.width, canvas1.height);
       
-      // начало координат - в центр канваса  
+      // почток координат - у центрі канвасу  
       ctx.save();
       ctx.translate(canvas1.width / 2, canvas1.height / 2);
 
-      // рисуем Солнце
-      ctx.fillStyle = "yellow";
-      ctx.beginPath();
-      ctx.arc(0, 0, 10, 0, Math.PI * 2, true); 
-      ctx.fill();
+      // Сонце
+      ctx.drawImage(Sun,  -sunSize / 2, -sunSize / 2, sunSize, sunSize);
 
-      // рисуем планеты
-
+      // планети
+     
       for (const planet of this.solSys.planets) {
-         ctx.beginPath();
-         ctx.arc(planet.x, planet.y, planet.size / 2, 0, Math.PI * 2, true); 
-         ctx.fill();            
+         const img = document.getElementById(planet.name);
+         ctx.drawImage(img,  
+         planet.x - planet.size / 2, 
+         planet.y - planet.size / 2, 
+         planet.size, planet.size);                   
       }
       ctx.restore();
    }
