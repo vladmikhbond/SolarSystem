@@ -1,4 +1,4 @@
-const model = new SolSys()
+const model = new SolarSys()
 model.addPlanet(new Planet('Venus', 12), 100);
 model.addPlanet(new Planet('Earth', 15), 150);
 model.addPlanet(new Planet('Mars', 10), 200);

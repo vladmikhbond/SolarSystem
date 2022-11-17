@@ -8,11 +8,11 @@ class Planet
    }
 
    step() {
-      let dist = Math.sqrt(this.x**2 + this.y**2);
-      let a = -SolSys.GM / dist**2;
+      let r = Math.sqrt(this.x**2 + this.y**2);
+      let a = -SolarSys.GM / r**2;
 
-      let ax = this.x * a / dist;
-      let ay = this.y * a / dist;
+      let ax = this.x * a / r;
+      let ay = this.y * a / r;
 
       this.vx += ax;
       this.vy += ay;
@@ -22,8 +22,8 @@ class Planet
    }
 }
 
-class SolSys {
-   static GM = 1000;
+class SolarSys {
+   static GM = 10000;
 
    constructor() {
       this.planets = [];
@@ -35,12 +35,19 @@ class SolSys {
       }
    }
 
-   addPlanet(planet, dist) {
-      planet.x = dist;
+   addPlanet(planet, r) {
+      planet.x = r;
       planet.y = 0;
       planet.vx = 0;
-      planet.vy = Math.sqrt(SolSys.GM / dist);     
+      planet.vy = Math.sqrt(SolarSys.GM / r);     
       this.planets.push(planet);
+   }
+
+   /////////////////// 2 ////////////////////////
+   getPlanetByCoords(x, y) {
+      const eps = 5;
+      let planet = this.planets.find(p => Math.abs(p.x - x) < eps && Math.abs(p.y - y) < eps);
+      return planet;
    }
 }
 
